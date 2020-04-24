@@ -53,7 +53,6 @@
     :class="[sizeClass, ...className]"
     :data-is-disabled="isDisabled"
     :data-is-error="isError"
-    @click="focusInput"
     )
     span.input__preffix(v-if="hasPrefix")
       slot(name="prefix")
