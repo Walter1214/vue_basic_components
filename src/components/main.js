@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import Input from './index'
+import BasicComponents from './index'
 
-Vue.use(Input)
+Vue.use(BasicComponents)

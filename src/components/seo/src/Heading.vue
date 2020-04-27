@@ -1,5 +1,5 @@
 <style lang="stylus">
-.text
+.heading
   margin 0
   font-weight 500
   word-wrap break-word
@@ -26,12 +26,14 @@
 <script>
 const headingType = [1, 2, 3, 4, 5, 6]
 export default {
-  name: 'BasicText',
+  name: 'Heading',
   props: {
     level: {
-      type: String,
-      default: 'p',
-      validator: level => headingType.includes(level)
+      type: [String, Number],
+      default: 1,
+      validator: level => {
+        return headingType.includes(level)
+      }
     }
   },
   methods: {
@@ -39,11 +41,11 @@ export default {
       this.$emit('click')
     }
   },
-  render(createElement) {
+  render(createElement, context) {
+    console.log('context', context)
     return createElement(
-      `${this.level}`,
+      `h${this.level}`,
       {
-        // 事件
         on: {
           click: this.clickHandler
         }

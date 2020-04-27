@@ -1,6 +1,7 @@
 <template lang="pug">
 .about
   BasicInput
+  BasicHeading(:level="4") Walter Test
 </template>
 
 <script lang="ts">

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Input from './input'
+import seo from './seo'
+const { Heading } = seo
 
-const basicComponents = [Input]
+const basicComponents = [Input, Heading]
 
 const install = function () {
   basicComponents.forEach(component => {
@@ -11,5 +13,8 @@ const install = function () {
 
 export default {
   install,
-  Input
+  Input,
+  Heading
 }
+
+export { Input, Heading }
