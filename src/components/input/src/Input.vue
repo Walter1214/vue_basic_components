@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  name: 'BasicInput',
+  name: 'Input',
   inheritAttrs: false,
   props: {
     value: {
