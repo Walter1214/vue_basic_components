@@ -4,7 +4,7 @@
   align-items center
   padding 0 16px
   border 2px solid
-  border-color var(--light-grey)
+  border-color var(--black)
   border-radius 5px
   background var(--light)
   font-size rem(14px)
@@ -29,7 +29,7 @@
     border-color #f0f3f0
     cursor not-allowed
     .input__inner
-      color var(--disabled)
+      color var(--secondary)
 
   &[data-is-error="true"]
     border-color var(--error)
@@ -39,7 +39,7 @@
     border 0
     flex 1
     background transparent
-    color var(--dark)
+    color var(--secondary)
 
     &:read-only
       cursor pointer
@@ -50,16 +50,16 @@
 
 <template lang="pug">
   .input(
-    :class="[sizeClass, ...className]"
+    :class="[sizeClass]"
     :data-is-disabled="isDisabled"
     :data-is-error="isError"
     )
     span.input__preffix(v-if="hasPrefix")
       slot(name="prefix")
     input.input__inner(
-      v-model="inputValue"
       v-bind="$attrs"
-      v-on="$listeners"
+      v-bind:value="value"
+      v-on="inputListeners"
       :disabled="isDisabled"
       )
     span.input__suffix(v-if="hasSuffix")
@@ -75,13 +75,9 @@ export default {
       type: [String, Number, Object, Array],
       default: ''
     },
-    className: {
-      type: String,
-      default: ''
-    },
     isDisabled: {
       type: Boolean,
-      default: false
+      default: true
     },
     isError: {
       type: Boolean,
@@ -96,13 +92,23 @@ export default {
     }
   },
   computed: {
-    inputValue: {
-      get() {
-        return this.value
-      },
-      set(value) {
-        this.$emit('input', value)
-      }
+    // },
+    inputListeners: function () {
+      const self = this
+      // `Object.assign` merges objects together to form a new object
+      return Object.assign(
+        {},
+        // We add all the listeners from the parent
+        this.$listeners,
+        // Then we can add custom listeners or override the
+        // behavior of some listeners.
+        {
+          // This ensures that the component works with v-model
+          input: function (event) {
+            self.$emit('input', event.target.value)
+          }
+        }
+      )
     },
     hasPrefix() {
       return !!this.$slots.prefix || !!this.$scopedSlots.prefix

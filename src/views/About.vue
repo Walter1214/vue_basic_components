@@ -1,17 +1,18 @@
 <template lang="pug">
 .about
-  BasicInput
-  BasicHeading(level="2" @click="test" class="sdfasfsadf asdf") Walter Test
+  BasicInput(v-model="test")
+  div {{test}}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  methods: {
-    test() {
-      alert(12312)
+  data() {
+    return {
+      test: 123213
     }
-  }
+  },
+  methods: {}
 })
 </script>
 
