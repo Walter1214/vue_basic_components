@@ -77,7 +77,7 @@ export default {
     },
     isDisabled: {
       type: Boolean,
-      default: true
+      default: false
     },
     isError: {
       type: Boolean,

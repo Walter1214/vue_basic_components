@@ -2,6 +2,7 @@
 .about
   BasicInput(v-model="test")
   div {{test}}
+  BasicHeading(level="1") adsffdfsdfg
 </template>
 
 <script lang="ts">
