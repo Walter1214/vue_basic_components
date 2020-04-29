@@ -26,31 +26,31 @@
 <script>
 const headingType = [1, 2, 3, 4, 5, 6]
 export default {
+  functional: true,
   name: 'Heading',
   props: {
     level: {
       type: [String, Number],
       default: 1,
       validator: level => {
-        return headingType.includes(level)
+        return headingType.includes(parseInt(level))
       }
     }
   },
-  methods: {
-    clickHandler() {
-      this.$emit('click')
-    }
-  },
+  methods: {},
   render(createElement, context) {
-    console.log('context', context)
+    const { props, children, data } = context
+    console.log('data :>> ', data)
     return createElement(
-      `h${this.level}`,
+      `h${props.level}`,
       {
-        on: {
-          click: this.clickHandler
-        }
+        ...data,
+        class: {
+          [`heading-h${props.level}`]: true
+        },
+        attrs: {}
       },
-      [this.$slots.default]
+      children
     )
   }
 }
